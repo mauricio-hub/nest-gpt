@@ -8,7 +8,7 @@ export class GptController {
 
   @Post('/orthography-check')
   async orthographyCheck(@Body() orthographyDto: OrthographyDto) {
-    //return orthographyDto;
-    return this.gptService.ortographyCheck()
+  
+    return this.gptService.ortographyCheck(orthographyDto)
   }
 }
