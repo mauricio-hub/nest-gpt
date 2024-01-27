@@ -7,6 +7,6 @@ export class GptService {
     //solo llama casos de ususo
     
     async ortographyCheck(){
-        return await orthographyCheckUseCase();
+        return await orthographyCheckUseCase()
     }
 }
