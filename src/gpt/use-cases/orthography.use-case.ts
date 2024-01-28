@@ -9,7 +9,6 @@ export const orthographyCheckUseCase = async (
   options: Options,
 ) => {
   const { prompt } = options;
-
   const completion = await openai.chat.completions.create({
     messages: [
       {
@@ -49,7 +48,12 @@ export const orthographyCheckUseCase = async (
   });
 
   // console.log(completion);
-  const jsonResp = JSON.parse(completion.choices[0].message.content);
 
-  return jsonResp;
+  try {
+    const jsonResp = JSON.parse(completion.choices[0].message.content);
+
+    return jsonResp;
+  } catch (e) {
+    console.log('error', e);
+  }
 };

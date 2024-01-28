@@ -12,6 +12,13 @@ async function bootstrap() {
     }),
   );
 
+  // Configuración de CORS
+  app.enableCors({
+    origin: process.env.FRONTEND_ORIGIN ,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   await app.listen(3000);
 }
 bootstrap();
