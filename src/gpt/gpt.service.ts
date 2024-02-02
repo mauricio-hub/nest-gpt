@@ -3,9 +3,10 @@ import {
   orthographyCheckUseCase,
   prosConsDiscusserStreamUseCase,
   prosConsDiscusserUseCase,
+  textToAudioUseCase,
   translateUseCase,
 } from './use-cases';
-import { OrthographyDto, ProsConsDiscusserDto } from './dtos';
+import { OrthographyDto, ProsConsDiscusserDto, TextToAudioDto } from './dtos';
 import OpenAI from 'openai';
 import { TranslateDto } from './dtos/translate.dto';
 
@@ -33,5 +34,10 @@ export class GptService {
 
   async translateText({prompt,lang}: TranslateDto) {
     return await translateUseCase(this.openai, {  prompt, lang });
+  }
+
+  async textToAudio({ prompt, voice }:TextToAudioDto) {
+    return await textToAudioUseCase(this.openai, { prompt, voice });
+    
   }
 }
