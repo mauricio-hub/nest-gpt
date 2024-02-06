@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   audioToTextUseCase,
+  imageGenerationUseCase,
   orthographyCheckUseCase,
   prosConsDiscusserStreamUseCase,
   prosConsDiscusserUseCase,
@@ -12,13 +13,14 @@ import {
 } from './use-cases';
 import {
   AudioToTextDto,
+  ImageGenerationDto,
   OrthographyDto,
   ProsConsDiscusserDto,
   TextToAudioDto,
 } from './dtos';
 import OpenAI from 'openai';
 import { TranslateDto } from './dtos/translate.dto';
-import { Audio } from 'openai/resources';
+import { Audio, Image } from 'openai/resources';
 
 //solo llama casos de ususo
 @Injectable()
@@ -69,5 +71,10 @@ export class GptService {
   ) {
     const { prompt } = audioToTextDto;
     return await audioToTextUseCase(this.openai, { audioFile, prompt });
+  }
+
+  async imageGeneration(imageGenerationDto:ImageGenerationDto) {
+    return imageGenerationUseCase(this.openai,{...imageGenerationDto}); 
+   
   }
 }
