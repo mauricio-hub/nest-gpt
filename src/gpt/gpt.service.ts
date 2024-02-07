@@ -74,7 +74,7 @@ export class GptService {
   }
 
   async imageGeneration(imageGenerationDto:ImageGenerationDto) {
-    return imageGenerationUseCase(this.openai,{...imageGenerationDto}); 
+    return await imageGenerationUseCase(this.openai,{...imageGenerationDto}); 
    
   }
 
@@ -84,7 +84,7 @@ export class GptService {
     const wasFileFound = fs.existsSync(filePath);
 
     if (!wasFileFound) throw new NotFoundException(`File ${fileName} not found`);
-    console.log('filePath.............',filePath);
+   
     return filePath;
   }
 

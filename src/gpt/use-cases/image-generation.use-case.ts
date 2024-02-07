@@ -24,13 +24,13 @@ export const imageGenerationUseCase = async (openai: OpenAI,options:Options) => 
        
     });
 
-    await downloadImageAsPng(response.data[0].url);
+   const url = await downloadImageAsPng(response.data[0].url);
 
    
 
     return {
-        url: response.data[0].url,
-        localPath: '',
+        url: url,
+        onpenIAUrl: response.data[0].url,
         revised_prompt: response.data[0].revised_prompt
     }
   
