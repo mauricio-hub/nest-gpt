@@ -1,7 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { SamAssistantService } from './sam-assistant.service';
-import { CreateSamAssistantDto } from './dto/create-sam-assistant.dto';
-import { UpdateSamAssistantDto } from './dto/update-sam-assistant.dto';
 import { QuestionDto } from './dto/question.dto';
 
 @Controller('sam-assistant')
@@ -15,7 +13,7 @@ export class SamAssistantController {
 
   @Post('user-question')
   async userQuestion(@Body() questionDto:QuestionDto){
-    return questionDto
+    return await this.samAssistantService.userQuestion(questionDto);
   }
 
 
