@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
-import { createMessageUseCase, createRunUseCase, createThreadUseCase } from './use-cases';
+import { checkCompleteStatus, createMessageUseCase, createRunUseCase, createThreadUseCase, getMessagesListUseCase } from './use-cases';
 import { QuestionDto } from './dto/question.dto';
 
 
@@ -23,7 +23,11 @@ export class SamAssistantService {
    
     const run = await createRunUseCase(this.openai,{threadId})
 
-   // return {message,run}
+    await checkCompleteStatus(this.openai,{threadId,runId:run.id})
+
+   const messages = await getMessagesListUseCase(this.openai,{threadId})
+
+    return messages.reverse()
 
   }
 }
