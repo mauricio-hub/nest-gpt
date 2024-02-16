@@ -12,9 +12,7 @@ export const getMessagesListUseCase = async (openai:OpenAI,options:Options) => {
 
     const messagesList = await openai.beta.threads.messages.list(
         threadId
-    )
-
-    console.log({messagesList});
+    );
 
     const messages = messagesList.data.map(message =>({
         role:message.role,
